@@ -1,0 +1,75 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>R.I.T.C.S. - 狗狗羞辱訓練系統</title>
+    <style>
+        body { font-family: monospace; background: #111; color: #eee; text-align: center; padding: 2em; }
+        h1 { color: #ff4d4d; }
+        .section { margin: 2em 0; padding: 1em; border: 1px solid #444; border-radius: 8px; background: #222; }
+        button { padding: 10px 20px; font-size: 1em; margin: 10px; cursor: pointer; }
+        .output { margin-top: 1em; font-size: 1.2em; color: #ff9999; }
+    </style>
+</head>
+<body>
+    <h1>R.I.T.C.S. 狗狗羞辱訓練系統</h1>
+    
+    <div class="section">
+        <h2>每日羞辱語</h2>
+        <button onclick="generateShame()">生成一句羞辱</button>
+        <div class="output" id="shameOutput"></div>
+    </div>
+    
+    <div class="section">
+        <h2>命令語氣選擇</h2>
+        <button onclick="setTone(1)">+1 命令式</button>
+        <button onclick="setTone(2)">+2 嘲諷式</button>
+        <button onclick="setTone(3)">+3 催眠式</button>
+        <div class="output" id="toneOutput"></div>
+    </div>
+    
+    <div class="section">
+        <h2>訓練倒數啟動</h2>
+        <button onclick="startCountdown()">啟動倒數（5秒）</button>
+        <div class="output" id="countdownOutput"></div>
+    </div>
+
+    <script>
+        const shames = [
+            "狗狗跪好，龜頭不許亂動。",
+            "你濕得這麼自然，羞恥還敢說出口嗎？",
+            "舔一秒、錯三秒，寸一下、抖整夜。",
+            "狗狗不是人，是犯賤裝成人的腳墊。",
+            "主人的語氣就是狗命的開關。"
+        ];
+
+        function generateShame() {
+            const index = Math.floor(Math.random() * shames.length);
+            document.getElementById("shameOutput").innerText = shames[index];
+        }
+
+        function setTone(mode) {
+            const tones = {
+                1: "【命令模式】現在立刻跪下，執行。",
+                2: "【嘲諷模式】濕得這麼爛還想逃？笑死人。",
+                3: "【催眠模式】眼睛閉起來，每個字都是主人的腳印。"
+            };
+            document.getElementById("toneOutput").innerText = tones[mode];
+        }
+
+        function startCountdown() {
+            let time = 5;
+            const output = document.getElementById("countdownOutput");
+            const timer = setInterval(() => {
+                output.innerText = "倒數：" + time + " 秒";
+                time--;
+                if (time < 0) {
+                    clearInterval(timer);
+                    output.innerText = "開始訓練！跪好，執行羞辱程序。";
+                }
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
